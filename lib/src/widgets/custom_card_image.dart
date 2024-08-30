@@ -32,9 +32,6 @@ class _CustomCardImageState extends State<CustomCardImage> {
         debugPrint(
           'ELEMENTOS DE LA LISTA ${widget.interest.toString().toUpperCase()}',
         );
-        debugPrint(
-          'EL ELEMENTO FUE SELECCIONADO ${isSelected.toString().toUpperCase()}',
-        );
       } else {
         widget.interest?.remove(widget.title);
         debugPrint(
@@ -42,9 +39,6 @@ class _CustomCardImageState extends State<CustomCardImage> {
         );
         debugPrint(
           'ELEMENTOS DE LA LISTA ${widget.interest.toString().toUpperCase()}',
-        );
-        debugPrint(
-          'EL ELEMENTO FUE SELECCIONADO ${isSelected.toString().toUpperCase()}',
         );
       }
     });

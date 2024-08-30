@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../models/client_model.dart';
+import '../models/seller_model.dart';
 import '../providers/autenticator_provider.dart';
-import '../providers/client_provider.dart';
+import '../providers/seller_provider.dart';
 import '../widgets/custom_alert.dart';
 
 class RegisterController {
@@ -13,15 +13,15 @@ class RegisterController {
 
   // Proveedores
   final _authProvider = AuthProvider();
-  final _clientProvider = ClientProvider();
+  final _sellerProvider = SellerProvider();
 
   // Modelos
-  Client? _client;
+  Seller? _seller;
 
   // Datos del usuario
   final fullNames = TextEditingController();
-  final age = TextEditingController();
-  String? gender;
+  final companyName = TextEditingController();
+  final nit = TextEditingController();
   final phoneNumber = TextEditingController();
   List<String> interest = []; // Inicializamos la lista aquí
   final email = TextEditingController();
@@ -41,16 +41,14 @@ class RegisterController {
     }
 
     // Verificar que la edad sea un número válido y mayor a 0
-    if (age.text.isEmpty ||
-        int.tryParse(age.text) == null ||
-        int.parse(age.text) < 18) {
-      CustomAlert.showMessage(context!, 'Error', 'Edad no válida');
+    if (companyName.text.isEmpty) {
+      CustomAlert.showMessage(context!, 'Error', 'Nombre de tu compañía no especificado');
       return false;
     }
 
     // Verificar que el género esté seleccionado
-    if (gender == null || gender!.isEmpty) {
-      CustomAlert.showMessage(context!, 'Error', 'Género no seleccionado');
+    if (nit.text.isEmpty) {
+      CustomAlert.showMessage(context!, 'Error', 'NIT no especificado');
       return false;
     }
 
@@ -64,7 +62,7 @@ class RegisterController {
     // Verificar que haya al menos un interés seleccionado
     if (interest.isEmpty) {
       CustomAlert.showMessage(
-          context!, 'Error', 'Debe seleccionar al menos un interés');
+          context!, 'Error', 'Debe seleccionar al menos una categoría.');
       return false;
     }
 
@@ -107,18 +105,18 @@ class RegisterController {
         if (isRegister) {
           final user = _authProvider.getUser();
           if (user != null) {
-            _client = Client(
+            _seller = Seller(
               id: user.uid,
               fullNames: fullNames.text,
-              age: age.text,
-              gender: gender,
-              phoneNumber: phoneNumber.text,
+              companyName: companyName.text,
+              nit: nit.text.trim(),
               interest: interest,
-              email: email.text,
+              phoneNumber: phoneNumber.text,
+              email: email.text.trim(),
               password: password.text,
             );
 
-            await _clientProvider.create(_client!);
+            await _sellerProvider.create(_seller!);
             Navigator.pushNamedAndRemoveUntil(
               context!,
               'DashboardView',

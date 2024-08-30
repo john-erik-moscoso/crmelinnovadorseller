@@ -66,4 +66,20 @@ class AuthProvider {
       return false; // Error inesperado
     }
   }
+
+  // Iniciar secion
+  Future<bool> login(String email, String password) async {
+    try {
+      await _firebase.signInWithEmailAndPassword(email: email, password: password);
+      return true;
+    } on FirebaseAuthException catch (error) {
+      // Manejo específico de errores de autenticación
+      return Future.error(error.code);
+    } catch (error) {
+      // Manejo de otros errores, como problemas de conexión
+      return Future.error("Ocurrió un error inesperado");
+    }
+  }
+
+
 }

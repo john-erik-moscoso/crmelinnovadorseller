@@ -84,7 +84,7 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     // Usuario
                     CustomInput(
-                      controller: _controller.user,
+                      controller: _controller.email,
                       obscureText: false,
                       keyboardType: TextInputType.text,
                       fillColor: Colors.white,
@@ -96,7 +96,7 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     // Contraseña
                     CustomInput(
-                      controller: _controller.user,
+                      controller: _controller.password,
                       obscureText: true,
                       keyboardType: TextInputType.text,
                       fillColor: Colors.white,
@@ -108,7 +108,7 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     // Boton Iniciar secion
                     CustomButtons(
-                      onTap: () => '',
+                      onTap: () => _controller.login(),
                       width: MediaQuery.of(context).size.width * .9,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 10,

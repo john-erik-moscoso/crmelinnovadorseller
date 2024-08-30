@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../models/client_model.dart';
+import '../models/seller_model.dart';
 
-class ClientProvider {
-  final _ref = FirebaseFirestore.instance.collection('Clients');
+class SellerProvider {
+  final _ref = FirebaseFirestore.instance.collection('Sellers');
 
   // Crear cliente
-  Future<void> create(Client client) async {
+  Future<void> create(Seller seller) async {
     try {
-      await _ref.doc(client.id).set(client.toJson());
+      await _ref.doc(seller.id).set(seller.toJson());
     } catch (error) {
       // Manejo de errores
       String errorMessage = error is FirebaseException
@@ -24,12 +24,12 @@ class ClientProvider {
   }
 
   // Obtener informacion
-  Future<Client?> getById(String id) async {
+  Future<Seller?> getById(String id) async {
     try {
       DocumentSnapshot document = await _ref.doc(id).get();
 
       if (document.exists) {
-        return Client.fromJson(document.data() as Map<String, dynamic>);
+        return Seller.fromJson(document.data() as Map<String, dynamic>);
       }
       return null; // Documento no encontrado
     } catch (error) {

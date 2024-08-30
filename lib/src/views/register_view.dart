@@ -2,7 +2,6 @@ import 'package:crmelinnovadorseller/src/controllers/register_controller.dart';
 import 'package:crmelinnovadorseller/src/tools/custom_colors.dart';
 import 'package:crmelinnovadorseller/src/widgets/custom_buttons.dart';
 import 'package:crmelinnovadorseller/src/widgets/custom_card_image.dart';
-import 'package:crmelinnovadorseller/src/widgets/custom_dropdown_menu.dart';
 import 'package:crmelinnovadorseller/src/widgets/custom_input.dart';
 import 'package:crmelinnovadorseller/src/widgets/custom_title.dart';
 import 'package:flutter/material.dart';
@@ -107,15 +106,27 @@ class _RegisterViewState extends State<RegisterView> {
                   color: CustomColors.colorPrimary,
                 ),
               ),
-              // Edad
+              // Nombre de la compania
               CustomInput(
-                controller: _controller.age,
+                controller: _controller.companyName,
+                obscureText: false,
+                keyboardType: TextInputType.text,
+                fillColor: Colors.white,
+                title: 'Razón social.',
+                icon: const Icon(
+                  Icons.abc,
+                  color: CustomColors.colorPrimary,
+                ),
+              ),
+              // Nit
+              CustomInput(
+                controller: _controller.nit,
                 obscureText: false,
                 keyboardType: TextInputType.number,
                 fillColor: Colors.white,
-                title: 'Edad.',
+                title: 'NIT.',
                 icon: const Icon(
-                  Icons.calendar_month_sharp,
+                  Icons.abc,
                   color: CustomColors.colorPrimary,
                 ),
               ),
@@ -129,21 +140,27 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
                 margin: const EdgeInsets.only(top: 10, bottom: 20),
                 backgroundColor: CustomColors.colorPrimary,
-                title: 'Elige información de tu interés.',
+                title: 'Elige contenidos a comercializar.',
                 colorText: Colors.white,
                 fontSize: 20,
                 fontFamily: 'Roboto',
                 fontWeight: FontWeight.w400,
                 icon: const Icon(
-                  Icons.abc,
+                  Icons.production_quantity_limits,
                   color: Colors.white,
                 ),
               ),
-              // Genero
-              CustomDropdownMenu(
-                title: 'Seleccione su género',
-                initialValue: _controller.gender,
-                items: gender,
+              // Celular
+              CustomInput(
+                controller: _controller.phoneNumber,
+                obscureText: false,
+                keyboardType: TextInputType.phone,
+                fillColor: Colors.white,
+                title: 'Celular.',
+                icon: const Icon(
+                  Icons.phone_android_rounded,
+                  color: CustomColors.colorPrimary,
+                ),
               ),
               // Usuario - Correo
               CustomInput(
