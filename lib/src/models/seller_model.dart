@@ -10,47 +10,48 @@ String sellerToJson(Seller data) => json.encode(data.toJson());
 
 class Seller {
   String id;
-  String? fullNames;
-  String? companyName;
   String? nit;
-  String? phoneNumber;
-  List<String>? interest;
+  String? companyName;
+  String? companyType;
+  String? fullNames;
   String? email;
   String? password;
+  String? phoneNumber;
+  List<String>? interest;
 
   Seller({
     required this.id,
-    this.fullNames,
-    this.companyName,
     this.nit,
-    this.phoneNumber,
-    this.interest,
+    this.companyName,
+    this.companyType,
+    this.fullNames,
     this.email,
     this.password,
+    this.phoneNumber,
+    this.interest,
   });
 
   factory Seller.fromJson(Map<String, dynamic> json) => Seller(
-        id: json["id"],
-        fullNames: json["fullNames"],
-        companyName: json["companyName"],
-        nit: json["nit"],
-        phoneNumber: json["phoneNumber"],
-        interest: json["interest"] == null
-            ? []
-            : List<String>.from(json["interest"]!.map((x) => x)),
-        email: json["email"],
-        password: json["password"],
-      );
+    id: json["id"],
+    nit: json["nit"],
+    companyName: json["companyName"],
+    companyType: json["companyType"],
+    fullNames: json["fullNames"],
+    email: json["email"],
+    password: json["password"],
+    phoneNumber: json["phoneNumber"],
+    interest: List<String>.from(json["interest"].map((x) => x)),
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "fullNames": fullNames,
-        "companyName": companyName,
-        "nit": nit,
-        "phoneNumber": phoneNumber,
-        "interest":
-            interest == null ? [] : List<dynamic>.from(interest!.map((x) => x)),
-        "email": email,
-        "password": password,
-      };
+    "id": id,
+    "nit": nit,
+    "companyName": companyName,
+    "companyType": companyType,
+    "fullNames": fullNames,
+    "email": email,
+    "password": password,
+    "phoneNumber": phoneNumber,
+    "interest": List<dynamic>.from(interest!.map((x) => x)),
+  };
 }

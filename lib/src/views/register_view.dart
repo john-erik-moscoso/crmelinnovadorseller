@@ -2,6 +2,7 @@ import 'package:crmelinnovadorseller/src/controllers/register_controller.dart';
 import 'package:crmelinnovadorseller/src/tools/custom_colors.dart';
 import 'package:crmelinnovadorseller/src/widgets/custom_buttons.dart';
 import 'package:crmelinnovadorseller/src/widgets/custom_card_image.dart';
+import 'package:crmelinnovadorseller/src/widgets/custom_dropdown_menu.dart';
 import 'package:crmelinnovadorseller/src/widgets/custom_input.dart';
 import 'package:crmelinnovadorseller/src/widgets/custom_title.dart';
 import 'package:flutter/material.dart';
@@ -84,8 +85,7 @@ class _RegisterViewState extends State<RegisterView> {
               // Titulo
               const CustomDescription(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                description:
-                    'Diligencia la siguiente información para continuar con tu registro.',
+                description: 'Diligencia la siguiente información para continuar con tu registro.',
                 fontSize: 18,
                 color: Colors.black,
                 fontFamily: 'Rboto',
@@ -93,6 +93,46 @@ class _RegisterViewState extends State<RegisterView> {
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
+              ),
+
+              // Nit de la empresa
+              CustomInput(
+                controller: _controller.nit,
+                obscureText: false,
+                keyboardType: TextInputType.number,
+                fillColor: Colors.white,
+                title: 'NIT.',
+                icon: const Icon(
+                  Icons.numbers,
+                  color: CustomColors.colorPrimary,
+                ),
+              ),
+              // Razon social
+              CustomInput(
+                controller: _controller.companyName,
+                obscureText: false,
+                keyboardType: TextInputType.name,
+                fillColor: Colors.white,
+                title: 'Razón social.',
+                icon: const Icon(
+                  Icons.drive_file_rename_outline_sharp,
+                  color: CustomColors.colorPrimary,
+                ),
+              ),
+              // Tipo de empresa
+              CustomDropdownMenu(
+                title: 'Tipo de empresa.',
+                items: const <String>[
+                  'Sociedad por acciones simplificadas (SAS)',
+                  'Sociedad limitada',
+                  'Empresa unipersonal',
+                  'Sociedad anónima',
+                  'Sociedad colectiva',
+                  'Sociedad Comandita Simple',
+                  'Sociedad comandita por acciones',
+                  'Empresa asociativa de trabajo'
+                ],
+                initialValue: _controller.companyType,
               ),
               // Nombres completos
               CustomInput(
@@ -104,50 +144,6 @@ class _RegisterViewState extends State<RegisterView> {
                 icon: const Icon(
                   Icons.drive_file_rename_outline_sharp,
                   color: CustomColors.colorPrimary,
-                ),
-              ),
-              // Nombre de la compania
-              CustomInput(
-                controller: _controller.companyName,
-                obscureText: false,
-                keyboardType: TextInputType.text,
-                fillColor: Colors.white,
-                title: 'Razón social.',
-                icon: const Icon(
-                  Icons.abc,
-                  color: CustomColors.colorPrimary,
-                ),
-              ),
-              // Nit
-              CustomInput(
-                controller: _controller.nit,
-                obscureText: false,
-                keyboardType: TextInputType.number,
-                fillColor: Colors.white,
-                title: 'NIT.',
-                icon: const Icon(
-                  Icons.abc,
-                  color: CustomColors.colorPrimary,
-                ),
-              ),
-              // Informacion de interes
-              CustomButtons(
-                onTap: () => _windowOfInterest(),
-                width: MediaQuery.of(context).size.width * .9,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 10,
-                ),
-                margin: const EdgeInsets.only(top: 10, bottom: 20),
-                backgroundColor: CustomColors.colorPrimary,
-                title: 'Elige contenidos a comercializar.',
-                colorText: Colors.white,
-                fontSize: 20,
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w400,
-                icon: const Icon(
-                  Icons.production_quantity_limits,
-                  color: Colors.white,
                 ),
               ),
               // Celular
@@ -198,6 +194,27 @@ class _RegisterViewState extends State<RegisterView> {
                   color: CustomColors.colorPrimary,
                 ),
               ),
+              // Informacion de interes
+              CustomButtons(
+                onTap: () => _windowOfInterest(),
+                width: MediaQuery.of(context).size.width * .9,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 10,
+                ),
+                margin: const EdgeInsets.only(top: 10, bottom: 20),
+                backgroundColor: CustomColors.colorPrimary,
+                title: 'Elige contenidos a comercializar.',
+                colorText: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w400,
+                icon: const Icon(
+                  Icons.production_quantity_limits,
+                  color: Colors.white,
+                ),
+              ),
+
               // Finalizar registro
               CustomButtons(
                 onTap: () => _controller.register(),
