@@ -14,7 +14,6 @@ class DashboardView extends StatefulWidget {
 class _DashboardViewState extends State<DashboardView> {
   final _controller = DashboardController();
 
-
   @override
   void initState() {
     // TODO: implement initState
@@ -39,7 +38,7 @@ class _DashboardViewState extends State<DashboardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: CustomColors.colorSecundary,
       appBar: AppBar(
         backgroundColor: CustomColors.colorPrimary,
         shape: const RoundedRectangleBorder(
@@ -69,13 +68,33 @@ class _DashboardViewState extends State<DashboardView> {
         ),
       ),
       body: SafeArea(
-        child: Container(
-          child: Column(
-            children: [
-
-            ],
+        child: Center(
+          child: Container(
+            child: Column(
+              children: [
+                _cardInventory(),
+              ],
+            ),
           ),
         ),
+      ),
+    );
+  }
+
+  // Cards
+  Widget _cardInventory() {
+    return Container(
+      margin: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      width: MediaQuery.of(context).size.width * .9,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        children: [
+          Text('Hola'),
+        ],
       ),
     );
   }

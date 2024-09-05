@@ -101,7 +101,7 @@ class RegisterController {
     return true;
   }
 
-  // Registrar
+
   Future<void> register() async {
     try {
       _progressDialog?.show(
@@ -127,7 +127,7 @@ class RegisterController {
               id: user.uid,
               nit: nit.text.trim(),
               companyName: companyName.text,
-              companyType: companyType,
+              companyType: companyType!,
               fullNames: fullNames.text,
               email: email.text.trim(),
               password: password.text,

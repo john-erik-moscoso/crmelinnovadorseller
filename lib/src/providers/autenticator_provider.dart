@@ -7,8 +7,13 @@ class AuthProvider {
 
   // Obtener el UID
   User? getUser() {
-    User? u = _firebase.currentUser;
-    return u;
+    try {
+      User? u = _firebase.currentUser;
+      return u;
+    } on FirebaseAuthException catch (error) {
+      debugPrint('ERROR AL TENER UID: ${error.message}');
+      return null;
+    }
   }
 
   // Verificar si esta logeado

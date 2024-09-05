@@ -10,25 +10,25 @@ String sellerToJson(Seller data) => json.encode(data.toJson());
 
 class Seller {
   String id;
-  String? nit;
-  String? companyName;
-  String? companyType;
-  String? fullNames;
-  String? email;
-  String? password;
-  String? phoneNumber;
-  List<String>? interest;
+  String nit;
+  String companyName;
+  String companyType;
+  String fullNames;
+  String email;
+  String password;
+  String phoneNumber;
+  List<String> interest;
 
   Seller({
     required this.id,
-    this.nit,
-    this.companyName,
-    this.companyType,
-    this.fullNames,
-    this.email,
-    this.password,
-    this.phoneNumber,
-    this.interest,
+    required this.nit,
+    required this.companyName,
+    required this.companyType,
+    required this.fullNames,
+    required this.email,
+    required this.password,
+    required this.phoneNumber,
+    required this.interest,
   });
 
   factory Seller.fromJson(Map<String, dynamic> json) => Seller(

@@ -132,7 +132,11 @@ class _RegisterViewState extends State<RegisterView> {
                   'Sociedad comandita por acciones',
                   'Empresa asociativa de trabajo'
                 ],
-                initialValue: _controller.companyType,
+                onChanged: (value) {
+                  setState(() {
+                    _controller.companyType = value;
+                  });
+                },
               ),
               // Nombres completos
               CustomInput(
@@ -271,6 +275,7 @@ class _RegisterViewState extends State<RegisterView> {
               // Esto asegura que el GridView se ajuste a su contenido
               padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 8),
               children: [
+                // Elementos de interes
                 CustomCardImage(
                   icon: HugeIcons.strokeRoundedHealth,
                   title: 'Salud',

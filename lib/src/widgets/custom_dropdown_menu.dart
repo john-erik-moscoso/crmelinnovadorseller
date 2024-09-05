@@ -4,14 +4,14 @@ import '../tools/custom_colors.dart';
 
 class CustomDropdownMenu extends StatefulWidget {
   final String title;
-  final String? initialValue;
   final List<String> items;
+  final ValueChanged<String?>? onChanged; // Callback for selection change
 
   const CustomDropdownMenu({
     super.key,
     required this.title,
-    this.initialValue,
     required this.items,
+    this.onChanged,
   });
 
   @override
@@ -19,13 +19,7 @@ class CustomDropdownMenu extends StatefulWidget {
 }
 
 class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
-  String? selectedValue;
-
-  @override
-  void initState() {
-    super.initState();
-    selectedValue = widget.initialValue;
-  }
+  String? _selectedValue; // Local state to store the selected value
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +33,7 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
       child: DropdownButton<String>(
         isExpanded: true,
         hint: Text(widget.title),
-        value: selectedValue,
+        value: _selectedValue,
         icon: const Icon(
           Icons.arrow_drop_down,
           color: CustomColors.colorPrimary,
@@ -53,8 +47,9 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
         ),
         onChanged: (String? newValue) {
           setState(() {
-            selectedValue = newValue!;
+            _selectedValue = newValue;
           });
+          widget.onChanged?.call(newValue);
         },
         items: widget.items.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
