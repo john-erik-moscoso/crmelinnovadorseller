@@ -1,4 +1,5 @@
 import 'package:crmelinnovadorseller/src/controllers/dashboard_controller.dart';
+import 'package:crmelinnovadorseller/src/widgets/custom_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -38,6 +39,7 @@ class _DashboardViewState extends State<DashboardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _controller.key,
       backgroundColor: CustomColors.colorSecundary,
       appBar: AppBar(
         backgroundColor: CustomColors.colorPrimary,
@@ -56,7 +58,7 @@ class _DashboardViewState extends State<DashboardView> {
           fontWeight: FontWeight.w500,
         ),
         leading: TextButton(
-          onPressed: () => '',
+          onPressed: () => _controller.key.currentState?.openDrawer(),
           child: const Text(
             'Menu',
             style: TextStyle(
@@ -67,12 +69,14 @@ class _DashboardViewState extends State<DashboardView> {
           ),
         ),
       ),
+      drawer: const CustomMenu(),
       body: SafeArea(
         child: Center(
-          child: Container(
+          child: SingleChildScrollView(
             child: Column(
               children: [
-                _cardInventory(),
+                _addItems('assets/images/products.jpg', 'Inventarios' ,()=>''),
+                _addItems('assets/images/message.jpg', 'Promocionar artículos' ,()=>''),
               ],
             ),
           ),
@@ -81,20 +85,56 @@ class _DashboardViewState extends State<DashboardView> {
     );
   }
 
-  // Cards
-  Widget _cardInventory() {
-    return Container(
-      margin: const EdgeInsets.only(top: 20),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      width: MediaQuery.of(context).size.width * .9,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        children: [
-          Text('Hola'),
-        ],
+  // Graficas
+
+  // Elementos de acceso
+  Widget _addItems(String url, String title, GestureTapCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: MediaQuery.of(context).size.width * .9,
+        margin: const EdgeInsets.only(top: 20),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 3,
+              blurRadius: 7,
+              offset: const Offset(0, 2),
+            ),
+          ]
+        ),
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              child: Image.asset(
+                url,
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * .1,
+                fit: BoxFit.cover,
+              ),
+            ),
+            // Texto
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                  const Icon(Icons.add),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

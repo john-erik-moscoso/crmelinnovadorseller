@@ -23,7 +23,9 @@ class AuthProvider {
 
   // Cerrar secion
   Future<Future<List<void>>> signOut() async {
-    return Future.wait([_firebase.signOut()]);
+    return Future.wait([
+      _firebase.signOut(),
+    ]);
   }
 
   // Registrar usuario
@@ -85,6 +87,4 @@ class AuthProvider {
       return Future.error("Ocurrió un error inesperado");
     }
   }
-
-
 }
