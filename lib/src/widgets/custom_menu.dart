@@ -39,9 +39,7 @@ class _CustomMenuState extends State<CustomMenu> with SingleTickerProviderStateM
             trailing: const Icon(Icons.edit),
             title: const Text('Editar perfil'),
             splashColor: CustomColors.colorPrimary,
-            onTap: () {
-              Navigator.pop(context);
-            },
+            onTap: ()=> Navigator.of(context).pushNamed('EditProfileView'),
           ),
           ListTile(
             trailing: const Icon(Icons.inventory),

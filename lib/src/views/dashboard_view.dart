@@ -1,5 +1,7 @@
 import 'package:crmelinnovadorseller/src/controllers/dashboard_controller.dart';
+import 'package:crmelinnovadorseller/src/widgets/custom_buttons.dart';
 import 'package:crmelinnovadorseller/src/widgets/custom_menu.dart';
+import 'package:crmelinnovadorseller/src/widgets/custom_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -71,14 +73,78 @@ class _DashboardViewState extends State<DashboardView> {
       ),
       drawer: const CustomMenu(),
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                _addItems('assets/images/products.jpg', 'Inventarios' ,()=>''),
-                _addItems('assets/images/message.jpg', 'Promocionar artículos' ,()=>''),
-              ],
-            ),
+        child: SingleChildScrollView(
+          child: Column(
+            // Contenido de la pagina
+            children: [
+              // Nombre de la empresa
+              Container(
+                margin: const EdgeInsets.only(top: 20),
+                width: MediaQuery.of(context).size.width * .9,
+                alignment: Alignment.centerLeft,
+                child: CustomTitle(
+                  title: _controller.seller?.companyName ?? 'Empresa',
+                  fontSize: 25,
+                  color: Colors.black,
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w600,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Center(
+                child: Column(
+                  children: [
+                    // Inventarios
+                    _addItems(
+                      'assets/images/products.jpg',
+                      'Inventarios',
+                      () => '',
+                      const Icon(
+                        Icons.add,
+                        color: CustomColors.colorPrimary,
+                      ),
+                    ),
+                    // Promocionar articulos
+                    _addItems(
+                      'assets/images/message.jpg',
+                      'Promocionar artículos',
+                      () => '',
+                      const Icon(
+                        Icons.add,
+                        color: CustomColors.colorPrimary,
+                      ),
+                    ),
+                    // Editar perfil
+                    _addItems(
+                      'assets/images/edit_profile.jpg',
+                      'Editar perfil',
+                      () => Navigator.of(context).pushNamed('EditProfileView'),
+                      const Icon(
+                        Icons.edit,
+                        color: CustomColors.colorPrimary,
+                      ),
+                    ),
+                    // Salir
+                    CustomButtons(
+                      onTap: () => _controller.exitApp(),
+                      width: MediaQuery.of(context).size.width * .9,
+                      padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 5),
+                      margin: const EdgeInsets.only(top: 40),
+                      backgroundColor: CustomColors.colorPrimary,
+                      title: 'Salir',
+                      colorText: Colors.white,
+                      fontSize: 20,
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      icon: const Icon(
+                        Icons.exit_to_app,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -88,24 +154,21 @@ class _DashboardViewState extends State<DashboardView> {
   // Graficas
 
   // Elementos de acceso
-  Widget _addItems(String url, String title, GestureTapCallback onTap) {
+  Widget _addItems(String url, String title, GestureTapCallback onTap, Widget icon) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         width: MediaQuery.of(context).size.width * .9,
         margin: const EdgeInsets.only(top: 20),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 3,
-              blurRadius: 7,
-              offset: const Offset(0, 2),
-            ),
-          ]
-        ),
+        decoration:
+            BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12), boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 3,
+            blurRadius: 7,
+            offset: const Offset(0, 2),
+          ),
+        ]),
         child: Column(
           children: [
             ClipRRect(
@@ -120,17 +183,16 @@ class _DashboardViewState extends State<DashboardView> {
             // Texto
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  const Icon(Icons.add),
-                ],
+              child: ListTile(
+                visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+                title: Text(title),
+                titleTextStyle: const TextStyle(
+                  color: CustomColors.colorPrimary,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+                trailing: icon,
+                splashColor: CustomColors.colorPrimary,
               ),
             ),
           ],

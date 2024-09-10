@@ -1,4 +1,5 @@
 import 'package:crmelinnovadorseller/src/views/dashboard_view.dart';
+import 'package:crmelinnovadorseller/src/views/edit_profile_view.dart';
 import 'package:crmelinnovadorseller/src/views/home_view.dart';
 import 'package:crmelinnovadorseller/src/views/register_view.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -40,6 +41,7 @@ class _CRMelInnovadorSellerState extends State<CRMelInnovadorSeller> {
         'home': (BuildContext context) => const HomeView(),
         'register': (BuildContext context) => const RegisterView(),
         'DashboardView': (BuildContext context) => const DashboardView(),
+        'EditProfileView': (BuildContext context)=> const EditProfileView(),
       },
     );
   }
