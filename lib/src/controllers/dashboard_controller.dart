@@ -35,10 +35,11 @@ class DashboardController {
 
   // Obtener datos de la empresa
   getInfoCompany() async{
-    seller = await _sellerProvider.getById(_id ?? _authProvider.getUser()!.uid);
+    seller = await _sellerProvider.getInfo(_id ?? _authProvider.getUser()!.uid);
     seller?.toJson().forEach((value, key){
       debugPrint('$key - $value');
     });
+    refresh!();
   }
 
   // Cerrar secion

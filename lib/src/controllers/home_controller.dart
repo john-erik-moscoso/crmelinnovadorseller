@@ -58,7 +58,7 @@ class HomeController {
       );
       bool login = await _authProvider.login(email.text, password.text);
       if (login) {
-        _seller = await _sellerProvider.getById(_authProvider.getUser()!.uid);
+        _seller = await _sellerProvider.getInfo(_authProvider.getUser()!.uid);
         if (_seller!.id.isNotEmpty) {
           _progressDialog?.close();
           Navigator.of(context!).pushNamedAndRemoveUntil(

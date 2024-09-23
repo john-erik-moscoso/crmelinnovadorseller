@@ -1,13 +1,11 @@
 import 'package:crmelinnovadorseller/src/controllers/register_controller.dart';
 import 'package:crmelinnovadorseller/src/tools/custom_colors.dart';
 import 'package:crmelinnovadorseller/src/widgets/custom_buttons.dart';
-import 'package:crmelinnovadorseller/src/widgets/custom_card_image.dart';
 import 'package:crmelinnovadorseller/src/widgets/custom_dropdown_menu.dart';
 import 'package:crmelinnovadorseller/src/widgets/custom_input.dart';
 import 'package:crmelinnovadorseller/src/widgets/custom_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:hugeicons/hugeicons.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -198,26 +196,6 @@ class _RegisterViewState extends State<RegisterView> {
                   color: CustomColors.colorPrimary,
                 ),
               ),
-              // Informacion de interes
-              CustomButtons(
-                onTap: () => _windowOfInterest(),
-                width: MediaQuery.of(context).size.width * .9,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 10,
-                ),
-                margin: const EdgeInsets.only(top: 10, bottom: 20),
-                backgroundColor: CustomColors.colorPrimary,
-                title: 'Elige contenidos a comercializar.',
-                colorText: Colors.white,
-                fontSize: 20,
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w400,
-                icon: const Icon(
-                  Icons.production_quantity_limits,
-                  color: Colors.white,
-                ),
-              ),
 
               // Finalizar registro
               CustomButtons(
@@ -247,6 +225,7 @@ class _RegisterViewState extends State<RegisterView> {
   }
 
   // Ventana emergente para seleccionar informacion de interes
+  /*
   Future _windowOfInterest() {
     return showDialog(
       barrierColor: CustomColors.colorPrimary,
@@ -346,4 +325,5 @@ class _RegisterViewState extends State<RegisterView> {
       },
     );
   }
+  */
 }

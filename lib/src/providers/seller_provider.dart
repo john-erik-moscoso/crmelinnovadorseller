@@ -19,12 +19,12 @@ class SellerProvider {
   }
 
   // Obtener informacion en tiempo real
-  Stream<DocumentSnapshot> getByIdStream(String id) {
+  Stream<DocumentSnapshot> getInfoStream(String id) {
     return _ref.doc(id).snapshots(includeMetadataChanges: true);
   }
 
   // Obtener informacion
-  Future<Seller?> getById(String id) async {
+  Future<Seller?> getInfo(String id) async {
     try {
       DocumentSnapshot document = await _ref.doc(id).get();
 

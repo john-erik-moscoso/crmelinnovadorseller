@@ -17,7 +17,7 @@ class Seller {
   String email;
   String password;
   String phoneNumber;
-  List<String> interest;
+  // List<String> interest;
 
   Seller({
     required this.id,
@@ -28,7 +28,7 @@ class Seller {
     required this.email,
     required this.password,
     required this.phoneNumber,
-    required this.interest,
+    // required this.interest,
   });
 
   factory Seller.fromJson(Map<String, dynamic> json) => Seller(
@@ -40,7 +40,7 @@ class Seller {
     email: json["email"],
     password: json["password"],
     phoneNumber: json["phoneNumber"],
-    interest: List<String>.from(json["interest"].map((x) => x)),
+    // interest: List<String>.from(json["interest"].map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {
@@ -52,6 +52,6 @@ class Seller {
     "email": email,
     "password": password,
     "phoneNumber": phoneNumber,
-    "interest": List<dynamic>.from(interest!.map((x) => x)),
+    // "interest": List<dynamic>.from(interest!.map((x) => x)),
   };
 }

@@ -151,8 +151,6 @@ class _DashboardViewState extends State<DashboardView> {
     );
   }
 
-  // Graficas
-
   // Elementos de acceso
   Widget _addItems(String url, String title, GestureTapCallback onTap, Widget icon) {
     return GestureDetector(

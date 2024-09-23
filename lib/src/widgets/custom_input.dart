@@ -11,6 +11,7 @@ class CustomInput extends StatefulWidget {
   final Color fillColor;
   final String title;
   final Icon icon;
+  final bool? enabled;
 
   const CustomInput({
     super.key,
@@ -23,6 +24,7 @@ class CustomInput extends StatefulWidget {
     required this.fillColor,
     required this.title,
     required this.icon,
+    this.enabled,
   });
 
   @override
@@ -39,6 +41,7 @@ class _CustomInputState extends State<CustomInput> {
           const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       width: widget.width ?? MediaQuery.of(context).size.width * .9,
       child: TextField(
+        enabled: widget.enabled ?? true,
         controller: widget.controller,
         obscureText: widget.obscureText,
         keyboardType: widget.keyboardType,

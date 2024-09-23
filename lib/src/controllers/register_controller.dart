@@ -30,7 +30,6 @@ class RegisterController {
   final password = TextEditingController();
   final repeatPassword = TextEditingController();
   final phoneNumber = TextEditingController();
-  List<String> interest = [];
 
   Future init(BuildContext context, Function refresh) async {
     this.context = context;
@@ -64,13 +63,6 @@ class RegisterController {
     if (phoneNumber.text.isEmpty || phoneNumber.text.length < 10) {
       _progressDialog?.close();
       CustomAlert.showMessage(context!, 'Error', 'Número de teléfono no válido');
-      return false;
-    }
-
-    // Verificar que haya al menos un interés seleccionado
-    if (interest.isEmpty) {
-      _progressDialog?.close();
-      CustomAlert.showMessage(context!, 'Error', 'Debe seleccionar al menos una categoría.');
       return false;
     }
 
@@ -132,7 +124,6 @@ class RegisterController {
               email: email.text.trim(),
               password: password.text,
               phoneNumber: phoneNumber.text.trim(),
-              interest: interest,
             );
             // Crea la base de datos
             await _sellerProvider.create(_seller!);
