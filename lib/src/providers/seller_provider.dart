@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 import '../models/seller_model.dart';
 
@@ -42,15 +43,17 @@ class SellerProvider {
   }
 
   // Actualizar datos
-  Future<void> update(Map<String, dynamic> data, String id) async {
+  Future<bool> update(Map<String, dynamic> data, String id) async {
     try {
       await _ref.doc(id).update(data);
+      return true;
     } catch (error) {
       // Manejo de errores
       String errorMessage = error is FirebaseException
           ? error.message ?? 'Error desconocido'
           : 'Error desconocido';
-      return Future.error(errorMessage);
+      debugPrint(errorMessage);
+      return false;
     }
   }
 }

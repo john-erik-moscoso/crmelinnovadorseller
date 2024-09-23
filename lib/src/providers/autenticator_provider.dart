@@ -77,7 +77,8 @@ class AuthProvider {
   // Iniciar secion
   Future<bool> login(String email, String password) async {
     try {
-      await _firebase.signInWithEmailAndPassword(email: email, password: password);
+      await _firebase.signInWithEmailAndPassword(
+          email: email, password: password);
       return true;
     } on FirebaseAuthException catch (error) {
       // Manejo específico de errores de autenticación
@@ -85,6 +86,32 @@ class AuthProvider {
     } catch (error) {
       // Manejo de otros errores, como problemas de conexión
       return Future.error("Ocurrió un error inesperado");
+    }
+  }
+
+  // Actualizar contraseña
+  Future<bool> updatePassword(String password) async {
+    try {
+      User? user = _firebase.currentUser; // Obtener usuario actual
+
+      if (user != null) {
+        await user.updatePassword(password);
+        debugPrint('Contraseña actualizada correctamente'.toUpperCase());
+        return true; // Devuelve true si la contraseña se actualizó correctamente
+      } else {
+        debugPrint('Usuario no encontrado.'.toUpperCase());
+        return false; // Devuelve false si el usuario es null
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'requires-recent-login') {
+        debugPrint('Por favor, vuelve a iniciar sesión.'.toUpperCase());
+      } else {
+        debugPrint('Error: ${e.message}'.toUpperCase());
+      }
+      return false; // Devuelve false si hay una excepción
+    } catch (e) {
+      debugPrint('Error: $e'.toUpperCase());
+      return false; // Devuelve false si hay cualquier otro error
     }
   }
 }

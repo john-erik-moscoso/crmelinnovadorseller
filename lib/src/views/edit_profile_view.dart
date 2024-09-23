@@ -1,8 +1,8 @@
 import 'package:crmelinnovadorseller/src/controllers/edit_profile_controller.dart';
 import 'package:crmelinnovadorseller/src/tools/custom_colors.dart';
+import 'package:crmelinnovadorseller/src/widgets/custom_buttons.dart';
 import 'package:crmelinnovadorseller/src/widgets/custom_input.dart';
 import 'package:crmelinnovadorseller/src/widgets/custom_title.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -95,27 +95,29 @@ class _EditProfileViewState extends State<EditProfileView>
                   overflow: TextOverflow.clip,
                 ),
               ),
-              // Nombres y Apellidos
+              // NIT
               CustomInput(
                 controller: _controller.nit,
                 obscureText: false,
                 keyboardType: TextInputType.number,
                 fillColor: Colors.white,
-                title: 'NIT',
+                title: 'NIT: ${_controller.seller?.nit ?? 'NIT:'}',
                 icon: const Icon(Icons.numbers),
               ),
               // Nombre de la compañia
               CustomInput(
                 controller: _controller.companyName,
                 obscureText: false,
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.text,
                 fillColor: Colors.white,
-                title: 'Nombre de la empresa.',
+                title:
+                    'Empresa: ${_controller.seller?.companyName ?? 'Nombre de la empresa.'}',
                 icon: const Icon(Icons.edit),
               ),
               // Tipo de empresa
               CustomDropdownMenu(
-                title: 'Tipo de empresa.',
+                title:
+                    'Tipo: ${_controller.seller?.companyType ?? 'Tipo de empresa.'}',
                 items: const <String>[
                   'Sociedad por acciones simplificadas (SAS)',
                   'Sociedad limitada',
@@ -132,7 +134,29 @@ class _EditProfileViewState extends State<EditProfileView>
                   });
                 },
               ),
-              // Datos de contacto
+              // Actualizar datos de la compañia
+              CustomButtons(
+                onTap: () async {
+                  _controller.saveDataCompany();
+                },
+                width: MediaQuery.of(context).size.width * .9,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 5,
+                  vertical: 10,
+                ),
+                margin: const EdgeInsets.only(top: 20),
+                backgroundColor: CustomColors.colorPrimary,
+                title: 'Actualizar datos de empresa.',
+                colorText: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w300,
+                icon: const Icon(
+                  Icons.save,
+                  color: Colors.white,
+                ),
+              ),
+              // Descripcion datos de usuario
               const Padding(
                 padding: EdgeInsets.only(
                   top: 30,
@@ -151,27 +175,52 @@ class _EditProfileViewState extends State<EditProfileView>
               CustomInput(
                 controller: _controller.fullNames,
                 obscureText: false,
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.text,
                 fillColor: Colors.white,
-                title: 'Nombres completos',
+                title:
+                    'Nombres: ${_controller.seller?.fullNames ?? 'Nombres completos.'}',
                 icon: const Icon(Icons.edit),
               ),
               // Telefono
               CustomInput(
                 controller: _controller.phoneNumber,
                 obscureText: false,
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.phone,
                 fillColor: Colors.white,
-                title: 'Número celular 🇨🇴',
+                title:
+                    'Celular 🇨🇴 ${_controller.seller?.phoneNumber ?? 'Número celular 🇨🇴'}',
                 icon: const Icon(Icons.phone_android),
               ),
+              // Actualizar datos de usuario
+              CustomButtons(
+                onTap: () async {
+                  await _controller.saveDataUser();
+                },
+                width: MediaQuery.of(context).size.width * .9,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 5,
+                  vertical: 10,
+                ),
+                margin: const EdgeInsets.only(top: 20),
+                backgroundColor: CustomColors.colorPrimary,
+                title: 'Actualizar datos de usuario.',
+                colorText: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w300,
+                icon: const Icon(
+                  Icons.save,
+                  color: Colors.white,
+                ),
+              ),
+              // Descripcio datos de cuenta
               const Padding(
                 padding: EdgeInsets.only(
                   top: 30,
                   bottom: 10,
                 ),
                 child: CustomTitle(
-                  title: 'Modifica los datos de la  cuenta.',
+                  title: 'Modifica los datos de la cuenta.',
                   fontSize: 20,
                   color: Colors.black,
                   fontFamily: 'Roboto',
@@ -193,7 +242,7 @@ class _EditProfileViewState extends State<EditProfileView>
               CustomInput(
                 controller: _controller.password,
                 obscureText: true,
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.text,
                 fillColor: Colors.white,
                 title: 'Contraseña.',
                 icon: const Icon(Icons.lock),
@@ -202,11 +251,34 @@ class _EditProfileViewState extends State<EditProfileView>
               CustomInput(
                 controller: _controller.repeatPassword,
                 obscureText: true,
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.text,
                 fillColor: Colors.white,
                 title: 'Repita la contraseña.',
                 icon: const Icon(Icons.lock),
               ),
+              // Actualizar datos de credenciales
+              CustomButtons(
+                onTap: () async {
+                  await _controller.saveCredentials();
+                },
+                width: MediaQuery.of(context).size.width * .9,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 5,
+                  vertical: 10,
+                ),
+                margin: const EdgeInsets.only(top: 20),
+                backgroundColor: CustomColors.colorPrimary,
+                title: 'Actualizar datos de la app.',
+                colorText: Colors.white,
+                fontSize: 20,
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w300,
+                icon: const Icon(
+                  Icons.save,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 50),
             ],
           ),
         ),
